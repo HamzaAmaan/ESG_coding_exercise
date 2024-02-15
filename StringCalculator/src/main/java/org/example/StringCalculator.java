@@ -46,7 +46,7 @@ public class StringCalculator
         return delimiters.toString();
     }
 
-    private static StringBuilder addEscapeCharacter(String delimiter) {
+    private StringBuilder addEscapeCharacter(String delimiter) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < delimiter.length(); i++) {
