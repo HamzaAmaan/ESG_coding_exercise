@@ -33,13 +33,17 @@ public class StringCalculator
         return extractSum(numbers);
     }
 
-    private String extractDelimiters(String delimiters)
+    private String extractDelimiters(String strDelimiters)
     {
-        String del = delimiters.replace(CUSTOM_DELIMITER_PREFIX, "")
-                                .replace(REGEX_OPEN, "")
-                                .replace(REGEX_CLOSE, "");
-        StringBuilder sb = addEscapeCharacter(del);
-        return BAR + sb;
+        strDelimiters = strDelimiters.replace(CUSTOM_DELIMITER_PREFIX, "")
+                                                .replace(REGEX_OPEN, "");
+        String[] arrDelimiters = strDelimiters.split(REGEX_CLOSE);
+        StringBuilder delimiters = new StringBuilder();
+        for (String delimiter: arrDelimiters)
+        {
+            delimiters.append(BAR).append(addEscapeCharacter(delimiter));
+        }
+        return delimiters.toString();
     }
 
     private static StringBuilder addEscapeCharacter(String delimiter) {

@@ -117,7 +117,7 @@ class StringCalculatorTest
         }
 
         @Test
-        void returnsSum_whenAnyLengthDelimiters()
+        void returnsSum_whenAnyLengthCustomDelimiters()
         {
             // WITH
             final String numbers = "//[|||]\n1|||2|||3";
@@ -126,6 +126,16 @@ class StringCalculatorTest
             // THEN
             assertEquals(6, result);
         }
-    }
 
+        @Test
+        void returnsSum_whenMultipleCustomDelimiters()
+        {
+            // WITH
+            final String numbers = "//[|][%]\n1|2%3";
+            // WHEN
+            final int result = calculator.Add(numbers);
+            // THEN
+            assertEquals(6, result);
+        }
+    }
 }
