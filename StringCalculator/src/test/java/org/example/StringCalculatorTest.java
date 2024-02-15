@@ -115,6 +115,17 @@ class StringCalculatorTest
             // THEN
             assertEquals(2, result);
         }
+
+        @Test
+        void returnsSum_whenAnyLengthDelimiters()
+        {
+            // WITH
+            final String numbers = "//[|||]\n1|||2|||3";
+            // WHEN
+            final int result = calculator.Add(numbers);
+            // THEN
+            assertEquals(6, result);
+        }
     }
 
 }

@@ -5,34 +5,56 @@ import java.util.List;
 
 public class StringCalculator
 {
+
     private static final String DELIMITER_NEW_LINE = "\n";
     private static final String DELIMITER_COMMA = ",";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String ESCAPE_CHARACTER = "\\";
+    private static final String BAR = "|";
+    private static final String REGEX_OPEN = "[";
+    private static final String REGEX_CLOSE = "]";
+
     public int Add(String strNumbers)
     {
         if (strNumbers.isEmpty())
             return 0;
 
-        String delimiters = DELIMITER_COMMA + DELIMITER_NEW_LINE;
+        String regex = REGEX_OPEN + DELIMITER_COMMA + DELIMITER_NEW_LINE + REGEX_CLOSE;
 
         if (strNumbers.startsWith(CUSTOM_DELIMITER_PREFIX))
         {
             String[] delimiterAndNumbers = strNumbers.split(DELIMITER_NEW_LINE, 2);
-            delimiters += delimiterAndNumbers[0].split(CUSTOM_DELIMITER_PREFIX)[1];
+            regex += extractDelimiters(delimiterAndNumbers[0]);
             strNumbers = delimiterAndNumbers[1];
         }
 
-        String[] numbers = extractNumbers(strNumbers, delimiters);
+        String[] numbers = extractNumbers(strNumbers, regex);
 
         return extractSum(numbers);
     }
 
-    private String[] extractNumbers(String strNumbers, String delimiters)
+    private String extractDelimiters(String delimiters)
     {
-        final String regex = "[" + delimiters + "]";
-        return strNumbers.split(regex);
+        String del = delimiters.replace(CUSTOM_DELIMITER_PREFIX, "")
+                                .replace(REGEX_OPEN, "")
+                                .replace(REGEX_CLOSE, "");
+        StringBuilder sb = addEscapeCharacter(del);
+        return BAR + sb;
     }
 
+    private static StringBuilder addEscapeCharacter(String delimiter) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < delimiter.length(); i++) {
+            sb.append(ESCAPE_CHARACTER).append(delimiter.charAt(i));
+        }
+        return sb;
+    }
+
+    private String[] extractNumbers(String strNumbers, String regex)
+    {
+        return strNumbers.split(regex);
+    }
     private int extractSum(String[] numbers)
     {
         int sum = 0;
