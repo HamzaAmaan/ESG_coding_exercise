@@ -61,6 +61,18 @@ class StringCalculatorTest {
             // THEN
             assertEquals(6, result);
         }
+
+        @Test
+        void returnsSum_whenSplitUsingCustomDelimiter()
+        {
+
+            // WITH
+            final String numbers = "//;\n1;2";
+            // WHEN
+            final int result = calculator.Add(numbers);
+            // THEN
+            assertEquals(3, result);
+        }
     }
 
 }
