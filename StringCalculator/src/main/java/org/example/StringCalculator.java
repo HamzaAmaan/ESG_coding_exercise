@@ -44,7 +44,8 @@ public class StringCalculator
             if (num < 0) {
                 invalidNumbers.add(number);
             } else {
-                sum += num;
+                if (num <= 1000)
+                    sum += num;
             }
         }
 

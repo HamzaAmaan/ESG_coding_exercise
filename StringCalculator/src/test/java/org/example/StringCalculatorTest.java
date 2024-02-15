@@ -104,6 +104,17 @@ class StringCalculatorTest
             // THEN
             assertEquals(expectedMessage, exception.getMessage());
         }
+
+        @Test
+        void returnsSum_ignoresValuesAbove1000()
+        {
+            // WITH
+            final String numbers = "1001,2";
+            // WHEN
+            final int result = calculator.Add(numbers);
+            // THEN
+            assertEquals(2, result);
+        }
     }
 
 }
