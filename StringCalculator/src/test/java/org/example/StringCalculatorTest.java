@@ -4,14 +4,17 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class StringCalculatorTest {
+class StringCalculatorTest
+{
 
     final StringCalculator calculator = new StringCalculator();
     @Nested
     class TestAdd {
         @Test
-        void returns0_whenGivenEmptyString() {
+        void returns0_whenGivenEmptyString()
+        {
             // WITH
             final String numbers = "";
             // WHEN
@@ -21,7 +24,8 @@ class StringCalculatorTest {
         }
 
         @Test
-        void returnsSameNumber_whenGivenStringContaining1Number() {
+        void returnsSameNumber_whenGivenStringContaining1Number()
+        {
             // WITH
             final String numbers = "5";
             // WHEN
@@ -31,7 +35,8 @@ class StringCalculatorTest {
         }
 
         @Test
-        void returnsSum_whenGivenStringContaining2Numbers() {
+        void returnsSum_whenGivenStringContaining2Numbers()
+        {
             // WITH
             final String numbers = "1,2";
             // WHEN
@@ -42,7 +47,8 @@ class StringCalculatorTest {
 
 
         @Test
-        void returnsSum_whenGivenStringContainingMoreThan2Numbers() {
+        void returnsSum_whenGivenStringContainingMoreThan2Numbers()
+        {
             // WITH
             final String numbers = "1,2,5,13";
             // WHEN
@@ -65,13 +71,38 @@ class StringCalculatorTest {
         @Test
         void returnsSum_whenSplitUsingCustomDelimiter()
         {
-
             // WITH
             final String numbers = "//;\n1;2";
             // WHEN
             final int result = calculator.Add(numbers);
             // THEN
             assertEquals(3, result);
+        }
+
+        @Test
+        void throwsException_whenStringContains1NegativeNumber()
+        {
+            // WITH
+            final String numbers = "-1,2";
+            final String expectedMessage = "Negatives not allowed: -1";
+            // WHEN
+            final IllegalArgumentException exception
+                    = assertThrows(IllegalArgumentException.class, () -> calculator.Add(numbers));
+            // THEN
+            assertEquals(expectedMessage, exception.getMessage());
+        }
+
+        @Test
+        void throwsException_whenStringContainsMultipleNegativeNumbers()
+        {
+            // WITH
+            final String numbers = "2,-4,3,-5";
+            final String expectedMessage = "Negatives not allowed: -4,-5";
+            // WHEN
+            final IllegalArgumentException exception
+                    = assertThrows(IllegalArgumentException.class, () -> calculator.Add(numbers));
+            // THEN
+            assertEquals(expectedMessage, exception.getMessage());
         }
     }
 
