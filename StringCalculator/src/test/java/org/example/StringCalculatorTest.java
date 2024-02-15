@@ -22,7 +22,6 @@ class StringCalculatorTest {
 
         @Test
         void returnsSameNumber_whenGivenStringContaining1Number() {
-
             // WITH
             final String numbers = "5";
             // WHEN
@@ -33,7 +32,6 @@ class StringCalculatorTest {
 
         @Test
         void returnsSum_whenGivenStringContaining2Numbers() {
-
             // WITH
             final String numbers = "1,2";
             // WHEN
@@ -45,13 +43,23 @@ class StringCalculatorTest {
 
         @Test
         void returnsSum_whenGivenStringContainingMoreThan2Numbers() {
-
             // WITH
             final String numbers = "1,2,5,13";
             // WHEN
             final int result = calculator.Add(numbers);
             // THEN
             assertEquals(21, result);
+        }
+
+        @Test
+        void returnsSum_whenSplitUsingNewLine()
+        {
+            // WITH
+            final String numbers = "1\n2,3";
+            // WHEN
+            final int result = calculator.Add(numbers);
+            // THEN
+            assertEquals(6, result);
         }
     }
 
