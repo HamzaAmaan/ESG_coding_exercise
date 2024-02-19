@@ -15,4 +15,10 @@ public class CustomerRepositoryInMemoryImpl implements CustomerRepository
     {
         database.put(customer.getCustomerRef(), customer);
     }
+
+    @Override
+    public Customer getCustomer(final String customerRef)
+    {
+        return null;
+    }
 }

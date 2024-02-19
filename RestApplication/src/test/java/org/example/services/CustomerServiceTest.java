@@ -33,4 +33,19 @@ class CustomerServiceTest
             verify(repository, times(1)).createCustomer(customer);
         }
     }
+    @Nested
+    class TestGetCustomer
+    {
+        @Test
+        void callsRepositoryMethodOnce()
+        {
+            //WITH
+            final String ref = "ref";
+            //WHEN
+            customerService.getCustomer(ref);
+            //THEN
+            verify(repository, times(1)).getCustomer(ref);
+        }
+    }
+
 }

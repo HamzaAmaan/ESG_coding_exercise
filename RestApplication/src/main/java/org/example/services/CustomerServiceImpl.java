@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public Customer getCustomer(String customerRef) {
-        return null;
+    public Customer getCustomer(final String customerRef) {
+        return repository.getCustomer(customerRef);
     }
 }
