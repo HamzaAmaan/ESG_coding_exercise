@@ -5,7 +5,6 @@ import java.util.List;
 
 public class StringCalculator
 {
-
     private static final String DELIMITER_NEW_LINE = "\n";
     private static final String DELIMITER_COMMA = ",";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
@@ -14,7 +13,7 @@ public class StringCalculator
     private static final String REGEX_OPEN = "[";
     private static final String REGEX_CLOSE = "]";
 
-    public int Add(String strNumbers)
+    public static int Add(String strNumbers)
     {
         if (strNumbers.isEmpty())
             return 0;
@@ -33,7 +32,7 @@ public class StringCalculator
         return extractSum(numbers);
     }
 
-    private String extractDelimiters(String strDelimiters)
+    private static String extractDelimiters(String strDelimiters)
     {
         strDelimiters = strDelimiters.replace(CUSTOM_DELIMITER_PREFIX, "")
                                                 .replace(REGEX_OPEN, "");
@@ -46,7 +45,7 @@ public class StringCalculator
         return delimiters.toString();
     }
 
-    private StringBuilder addEscapeCharacter(String delimiter) {
+    private static StringBuilder addEscapeCharacter(String delimiter) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < delimiter.length(); i++) {
@@ -55,11 +54,11 @@ public class StringCalculator
         return sb;
     }
 
-    private String[] extractNumbers(String strNumbers, String regex)
+    private static String[] extractNumbers(String strNumbers, String regex)
     {
         return strNumbers.split(regex);
     }
-    private int extractSum(String[] numbers)
+    private static int extractSum(String[] numbers)
     {
         int sum = 0;
         final List<String> invalidNumbers = new ArrayList<>();

@@ -3,13 +3,12 @@ package org.example;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.example.StringCalculator.Add;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorTest
 {
-
-    final StringCalculator calculator = new StringCalculator();
     @Nested
     class TestAdd {
         @Test
@@ -18,7 +17,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(0, result);
         }
@@ -29,7 +28,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "5";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(5, result);
         }
@@ -40,7 +39,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "1,2";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(3, result);
         }
@@ -52,7 +51,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "1,2,5,13";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(21, result);
         }
@@ -63,7 +62,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "1\n2,3";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(6, result);
         }
@@ -74,7 +73,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "//;\n1;2";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(3, result);
         }
@@ -87,7 +86,7 @@ class StringCalculatorTest
             final String expectedMessage = "Negatives not allowed: -1";
             // WHEN
             final IllegalArgumentException exception
-                    = assertThrows(IllegalArgumentException.class, () -> calculator.Add(numbers));
+                    = assertThrows(IllegalArgumentException.class, () -> Add(numbers));
             // THEN
             assertEquals(expectedMessage, exception.getMessage());
         }
@@ -100,7 +99,7 @@ class StringCalculatorTest
             final String expectedMessage = "Negatives not allowed: -4,-5";
             // WHEN
             final IllegalArgumentException exception
-                    = assertThrows(IllegalArgumentException.class, () -> calculator.Add(numbers));
+                    = assertThrows(IllegalArgumentException.class, () -> Add(numbers));
             // THEN
             assertEquals(expectedMessage, exception.getMessage());
         }
@@ -111,7 +110,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "1001,2";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(2, result);
         }
@@ -122,7 +121,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "//[|||]\n1|||2|||3";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(6, result);
         }
@@ -133,7 +132,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "//[|][%]\n1|2%3";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(6, result);
         }
@@ -144,7 +143,7 @@ class StringCalculatorTest
             // WITH
             final String numbers = "//[|||][%%%]\n1|||2%%%3";
             // WHEN
-            final int result = calculator.Add(numbers);
+            final int result = Add(numbers);
             // THEN
             assertEquals(6, result);
         }
