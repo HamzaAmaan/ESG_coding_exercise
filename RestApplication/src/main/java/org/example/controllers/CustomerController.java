@@ -19,4 +19,11 @@ public class CustomerController
     {
         service.addCustomer(customer);
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Customer getCustomer(@RequestBody String customerRef)
+    {
+        return service.getCustomer(customerRef);
+    }
 }

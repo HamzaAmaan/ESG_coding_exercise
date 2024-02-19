@@ -16,4 +16,9 @@ public class CustomerServiceImpl implements CustomerService
     {
         repository.createCustomer(customer);
     }
+
+    @Override
+    public Customer getCustomer(String customerRef) {
+        return null;
+    }
 }

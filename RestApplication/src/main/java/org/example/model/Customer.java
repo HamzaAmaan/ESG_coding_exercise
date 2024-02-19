@@ -6,6 +6,7 @@ import org.example.enums.Delimiters;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Customer
 {
     private String customerRef;

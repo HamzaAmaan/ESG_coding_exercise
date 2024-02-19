@@ -5,4 +5,6 @@ import org.example.model.Customer;
 public interface CustomerService
 {
      void addCustomer(final Customer customer);
+
+     Customer getCustomer(final String customerRef);
 }
