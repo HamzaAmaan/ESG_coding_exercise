@@ -27,6 +27,7 @@ class CustomerControllerTest
     @Nested
     class TestAddCustomer
     {
+        private static final String ENDPOINT = "/customer";
         @Test
         void returns201_whenCustomerAdded() throws Exception
         {
@@ -34,11 +35,24 @@ class CustomerControllerTest
             final Customer customer = new Customer();
             // WHEN
             ResultActions action = mockMvc.perform(MockMvcRequestBuilders
-                    .post("/customer")
+                    .post(ENDPOINT)
                     .content(asJsonString(customer))
                     .contentType(MediaType.APPLICATION_JSON));
             // THEN
             action.andExpect(status().isCreated());
+        }
+
+        @Test
+        void returns400_whenProvidedInvalidJson() throws Exception
+        {
+            // WITH
+            // WHEN
+            ResultActions action = mockMvc.perform(MockMvcRequestBuilders
+                    .post(ENDPOINT)
+                    .content("")
+                    .contentType(MediaType.APPLICATION_JSON));
+            // THEN
+            action.andExpect(status().isBadRequest());
         }
     }
 
