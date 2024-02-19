@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.example.csvReader.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

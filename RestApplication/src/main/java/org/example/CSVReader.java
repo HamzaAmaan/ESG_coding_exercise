@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.model.Customer;
+import org.example.csvReader.model.Customer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
-import static org.example.enums.ErrorMessage.*;
+import static org.example.csvReader.enums.ErrorMessage.*;
 
 public class CSVReader
 {
