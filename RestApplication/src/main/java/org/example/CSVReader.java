@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.model.Customer;
 import org.example.utils.CustomerMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,11 +13,13 @@ import java.util.Objects;
 
 import static org.example.enums.ErrorMessage.*;
 
+@SpringBootApplication
 public class CSVReader
 {
     private static final String CSV_EXTENSION = ".csv";
 
     public static void main(String[] args) {
+        SpringApplication.run(CSVReader.class, args);
         if (args.length == 0 || Objects.equals(args[0], ""))
         {
             throw new IllegalArgumentException(MISSING_ARGUMENT.getMessage());
