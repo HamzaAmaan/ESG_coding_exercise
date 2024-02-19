@@ -15,6 +15,7 @@
         <jupiter-verion>5.10.2</jupiter-verion>
         <lombok-verion>1.18.30</lombok-verion>
         <spring-boot.version>3.2.2</spring-boot.version>
+        <mockito.version>5.10.0</mockito.version>
     </properties>
 
     <dependencies>
@@ -47,5 +48,12 @@
             <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>

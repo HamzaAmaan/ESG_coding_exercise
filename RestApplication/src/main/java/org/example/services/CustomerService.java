@@ -2,9 +2,7 @@ package org.example.services;
 
 import org.example.model.Customer;
 
-public class CustomerService
+public interface CustomerService
 {
-    public void addCustomer(Customer customer) {
-
-    }
+     void addCustomer(final Customer customer);
 }
