@@ -1,8 +1,11 @@
-package org.example.api.model;
+package org.example.model;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
+import org.example.enums.Delimiters;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Customer
 {
     private String customerRef;

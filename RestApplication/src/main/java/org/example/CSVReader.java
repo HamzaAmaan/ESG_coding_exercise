@@ -1,6 +1,7 @@
 package org.example;
 
-import org.example.csvReader.model.Customer;
+import org.example.model.Customer;
+import org.example.utils.CustomerMapper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
-import static org.example.csvReader.enums.ErrorMessage.*;
+import static org.example.enums.ErrorMessage.*;
 
 public class CSVReader
 {
@@ -43,7 +44,7 @@ public class CSVReader
             String line;
             while ((line = reader.readLine()) != null)
             {
-                final Customer customer = Customer.fromLine(line);
+                final Customer customer = CustomerMapper.fromLine(line);
                 sendDataToRestAPI(customer);
             }
         } catch (IOException e)
