@@ -19,6 +19,6 @@ public class CustomerRepositoryInMemoryImpl implements CustomerRepository
     @Override
     public Customer getCustomer(final String customerRef)
     {
-        return null;
+        return database.get(customerRef);
     }
 }
