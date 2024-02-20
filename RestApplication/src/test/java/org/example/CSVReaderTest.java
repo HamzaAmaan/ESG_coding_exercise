@@ -1,15 +1,26 @@
 package org.example;
 
+import org.example.model.Customer;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 class CSVReaderTest
 {
     @Nested
-    class TestRetrievingFile {
+    class TestRetrievingFile
+    {
         @Test
         void throwsException_whenNoFilePathPassedAsArgument()
         {
@@ -59,6 +70,34 @@ class CSVReaderTest
                     = assertThrows(IllegalArgumentException.class, () -> CSVReader.main(new String[]{filePath}));
             // THEN
             assertEquals(expectedMessage, exception.getMessage());
+        }
+    }
+
+    @Nested
+    @ExtendWith(MockitoExtension.class)
+    class TestSendingDataToApi
+    {
+        @Mock
+        private RestTemplate restTemplate;
+        @Test
+        public void successfullySendsData() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+        {
+            // WITH
+            final Customer customer = new Customer();
+            final String apiUrl = "http://localhost:8080/customer";
+            final HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), any())).thenReturn(new ResponseEntity<>(HttpStatus.CREATED));
+
+            // Access method using reflection
+            Method sendDataToRestAPIMethod = CSVReader.class.getDeclaredMethod("sendDataToRestAPI",
+                    Customer.class, HttpHeaders.class, RestTemplate.class, String.class);
+            sendDataToRestAPIMethod.setAccessible(true);
+            // WHEN
+            sendDataToRestAPIMethod.invoke(null, customer, headers, restTemplate, apiUrl);
+            // THEN
+            verify(restTemplate, times(1)).postForEntity(eq(apiUrl), any(), eq(String.class));
         }
     }
 }

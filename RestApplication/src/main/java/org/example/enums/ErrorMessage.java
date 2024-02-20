@@ -9,7 +9,8 @@ public enum ErrorMessage
 {
     MISSING_ARGUMENT("Please provide the CSV file path as an argument."),
     INVALID_FILE_EXTENSION("The file path provided is not for a CSV file."),
-    MISSING_FILE("File does not exist.")
+    MISSING_FILE("File does not exist."),
+    FAILED_SENDING_DATA("Failed to send customer data. Status code: ")
     ;
 
     private final String message;
